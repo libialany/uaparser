@@ -17,15 +17,14 @@ def hello_world():
 # Este endpoint recibe los pings de los clientes
 # y guardamos el último ping en la base de datos
 @app.route('/estoyvivo', methods=['POST'])
-def post_data():
+def estoyvivo():
     data = request.get_json()
     visitor_id = data.get('visitorId')
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT OR REPLACE INTO dispositivos (visitante, ultimoping) VALUES (?, NOW())", (visitor_id))
+    cursor.execute("INSERT OR REPLACE INTO dispositivos (visitante, ultimoping) VALUES (?, datetime('now'))", (visitor_id,))
     conn.commit()
     conn.close()
-
     return str(visitor_id)
 
 if __name__ == '__main__':
