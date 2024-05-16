@@ -1,5 +1,6 @@
 Flask==2.0.1
 Werkzeug==2.2.2
+requests==2.31.0
 # ua_parser[re2]
 # ua-parser
 # pyyaml

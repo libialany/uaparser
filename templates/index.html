@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>FlaskBlog</title>
+    <title>Escáner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='ua-parser.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/escaner.js') }}"></script>
 </head>
-<body>
-   <h1>Welcome to FlaskBlog</h1>
+
+<body style="height:50vh;">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand ml-3" href="/">Kiosco App</a>
+        </div>
+    </nav>
+    <!-- ENDNAVBAR -->
+    <h1>Bienvenidos al escáner</h1>
+    Su versión de navegador <span id="navegador_actual"></span>
+    Usuarios activos: <span id="usuarios_activos"></span>
+    <script>
+        const ua = new UAParser();
+        const dataClients = ua.getBrowser().withClientHints().then(function (browser) {
+            console.log('Using Client-Hints: ', browser);
+            getNavegadorActual(browser['name'],browser['major']);
+        });
+    </script>
 </body>
+
 </html>
