@@ -18,14 +18,57 @@
         </div>
     </nav>
     <!-- ENDNAVBAR -->
-    <h1>Bienvenidos al escáner</h1>
-    Su versión de navegador <span id="navegador_actual"></span>
-    Usuarios activos: <span id="usuarios_activos"></span>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-primary" role="alert">
+                    <h4 class="alert-heading">Bienvenido al escáner</h4>
+                    <p>Este es un escáner de dispositivos que se conectan a la red. Aquí podrás ver la información de
+                        los
+                        dispositivos que se conectan a la red.</p>
+                    <hr>
+                    <p class="mb-0">Recuerda que esta información es sensible y no debe ser compartida con personas
+                        ajenas a la red.</p>
+                    <div class="col-md-7">
+                        <!-- TABLE -->
+                        <h1 style="color: rgb(241, 240, 234);">DATOS</h1>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td scope="col">Descripcion</td>
+                                    <td scope="col">Dato</td>
+                                    <td scope="col">Operacion</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Su versión de navegador</td>
+                                    <td><span id="navegador_actual"></span></td>
+                                    <td>
+                                        <a class="btn btn-info" href=""> Edit</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Usuarios activos:</td>
+                                    <td><span id="usuarios_activos"></span></td>
+                                    <td>
+                                        <a class="btn btn-info" href="/">Actualizar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- ENDTABLE -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const ua = new UAParser();
         const dataClients = ua.getBrowser().withClientHints().then(function (browser) {
             console.log('Using Client-Hints: ', browser);
-            getNavegadorActual(browser['name'],browser['major']);
+            getNavegadorActual(browser['name'], browser['major']);
         });
     </script>
 </body>
