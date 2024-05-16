@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script src="{{ url_for('static', filename='ua-parser.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/escaner.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/os.js') }}"></script>
 </head>
 
 <body style="height:50vh;">
@@ -43,14 +44,16 @@
                             <tbody>
                                 <tr>
                                     <td>Su versión de navegador</td>
-                                    <td><span id="navegador_actual"></span></td>
+                                    <td><span id="navegador_actual"></span><br />
+    Su versión de Sistema Operativo <span id="os_actual"></span><br /></td>
                                     <td>
                                         <a class="btn btn-info" href=""> Edit</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Usuarios activos:</td>
-                                    <td><span id="usuarios_activos"></span></td>
+                                    <td><span id="usuarios_activos"></span><br />
+    Detector de Malware: <span id="malware_activo">Cargando...</span><br /></td>
                                     <td>
                                         <a class="btn btn-info" href="/">Actualizar</a>
                                     </td>
@@ -70,6 +73,8 @@
             console.log('Using Client-Hints: ', browser);
             getNavegadorActual(browser['name'], browser['major']);
         });
+        // TODO: Agregar lo mismo para el OS
+        // el endpoint es /os_actual con variables name, major
     </script>
 </body>
 
