@@ -65,14 +65,6 @@ function getNavegadorActual(name, major) {
         } else {
           console.log('The variable is not a Promise.');
         }
-        // const navegadorActualSpan = document.getElementById('navegador_actual');
-        // if (respuesta == "OK") {
-        //     navegadorActualSpan.textContent = "Si es actual";
-        // } else if (respuesta == "NOK") {
-        //     navegadorActualSpan.textContent = "No es actual";
-        // } else {
-        //     navegadorActualSpan.textContent = "No se pudo determinar";
-        // }
       } else {
         throw new Error('GET request failed');
       }
