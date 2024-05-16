@@ -54,24 +54,18 @@ def blacklist():
 
 # Verificar el atributo "navegador" y "version". Si el navegador es Chrome y la versión es mayor a 80, responder con OK.
 # De lo contrario, responder con NOK.
-@app.route('/navegador', methods=['GET', 'POST'])
+@app.route('/navegador_actual', methods=['GET', 'POST'])
 def navegador():
-    data = request.get_json()
-    navegador = data.get('navegador')
-    version = data.get('version')
+    navegador = request.args.get('navegador')
+    version = request.args.get('version')
     if navegador == 'Chrome' and int(version) > 121:
-        navegador_actualizado = True
-    elif navegador == 'Firefox' and int(version) > 122:
-        navegador_actualizado = True
+        return "OK";
+    elif navegador == 'Firefox' and int(version) > 120:
+        return "OK";
     elif navegador == 'Opera' and int(version) >= 700:
-        navegador_actualizado = True
+        return "OK";
     else:
-        navegador_actualizado = False
-
-    tabla = {
-        'navegador': navegador_actualizado
-    }
-    return tabla;
+        return "NOK";
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

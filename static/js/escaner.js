@@ -42,3 +42,25 @@ function estoyvivo() {
 
 setInterval(estoyvivo, 60000);
 estoyvivo();
+
+function getNavegadorActual() {
+    //TODO: Lib agrega una URL con datos de verdad
+    fetch('/navegador_actual?navegador=Firefox&version=90')
+    .then(response => {
+      if (response.ok) {
+        respuesta = response.text();
+        const navegadorActualSpan = document.getElementById('navegador_actual');
+        if (respuesta == "OK") {
+            navegadorActualSpan.textContent = "Si es actual";
+        } else if (respuesta == "NOK") {
+            navegadorActualSpan.textContent = "No es actual";
+        } else {
+            navegadorActualSpan.textContent = "No se pudo determinar";
+        }
+      } else {
+        throw new Error('GET request failed');
+      }
+    });
+}
+
+getNavegadorActual();
