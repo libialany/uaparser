@@ -27,5 +27,15 @@ def estoyvivo():
     conn.close()
     return str(visitor_id)
 
+# This Flask endpoint counts all pings received on 10 minutes
+@app.route('/usuariosactivos')
+def pingcount():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT count(*) as count FROM dispositivos WHERE ultimoping >= datetime('now', '-10 minutes')")
+    count = cursor.fetchone()
+    conn.close()
+    return str(count['count'])
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
