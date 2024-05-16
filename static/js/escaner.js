@@ -40,4 +40,5 @@ function estoyvivo() {
   });
 }
 
-setInterval(estoyvivo, 60000); // Send POST request every minute (60000 milliseconds)
+setInterval(estoyvivo, 60000);
+estoyvivo();
