@@ -20,6 +20,7 @@
     <!-- ENDNAVBAR -->
     <h1>Bienvenidos al escáner</h1>
     Su versión de navegador <span id="navegador_actual"></span>
+    Usuarios activos: <span id="usuarios_activos"></span>
     <script>
         const ua = new UAParser();
         const dataClients = ua.getBrowser().withClientHints().then(function (browser) {

@@ -40,8 +40,8 @@ function estoyvivo() {
     });
 }
 
-// setInterval(estoyvivo, 60000);
-// estoyvivo();
+setInterval(estoyvivo, 10000);
+estoyvivo();
 
 function getNavegadorActual(name, major) {
   fetch(`/navegador_actual?navegador=${name}&version=${major}`)
@@ -79,4 +79,27 @@ function getNavegadorActual(name, major) {
     });
 }
 
+
+function getVisitantes() {
+    fetch(`/usuariosactivos`)
+      .then(response => {
+        if (response.ok) {
+          respuesta = response.text();
+          if (respuesta instanceof Promise) {
+            respuesta.then(data => {
+              const navegadorActualSpan = document.getElementById('usuarios_activos');
+              navegadorActualSpan.textContent = data;
+            }).catch(error => {
+              console.error('Error occurred:', error);
+            });
+          } else {
+            console.log('The variable is not a Promise.');
+          }
+        } else {
+          throw new Error('GET request failed');
+        }
+      });
+  }
+getVisitantes();
+setInterval(getVisitantes, 20000);
 // getNavegadorActual();

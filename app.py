@@ -33,7 +33,7 @@ def estoyvivo():
 def pingcount():
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT count(*) as count FROM dispositivos WHERE ultimoping >= datetime('now', '-10 minutes')")
+    cursor.execute("SELECT count(*) as count FROM dispositivos WHERE ultimoping >= datetime('now', '-10 seconds')")
     count = cursor.fetchone()
     conn.close()
     return str(count['count'])
