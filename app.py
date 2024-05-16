@@ -41,10 +41,10 @@ def pingcount():
 # Obtener una lista de IPs en blacklist.
 # Si la IP del cliente está presente, responder con NOK en json.
 # De lo contrario, con OK.
-@app.route('/blacklist', methods=['GET', 'POST'])
+@app.route('/blacklist')
 def blacklist():
     ip = request.remote_addr
-    url = 'http://192.168.210.1:3080/cgi-bin/dominios.sh'
+    url = 'http://192.168.210.1:3080/cgi-bin/dominios2.sh'
     response = requests.get(url)
     ips_contaminadas = response.text 
     if ip in ips_contaminadas:
@@ -63,6 +63,23 @@ def navegador():
     elif navegador == 'Firefox' and int(version) > 120:
         return "OK";
     elif navegador == 'Opera' and int(version) >= 700:
+        return "OK";
+    else:
+        return "NOK";
+
+@app.route('/os_actual', methods=['GET', 'POST'])
+def os():
+    os = request.args.get('os')
+    version = request.args.get('version')
+    if os == 'Android' and int(version) > 9:
+        return "OK";
+    elif os == 'iOS' and int(version) > 13:
+        return "OK";
+    elif os == 'Windows' and int(version) > 10:
+        return "OK";
+    elif os == 'Mac' and int(version) > 10:
+        return "OK";
+    elif os == 'Linux':
         return "OK";
     else:
         return "NOK";

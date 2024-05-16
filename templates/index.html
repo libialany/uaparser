@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script src="{{ url_for('static', filename='ua-parser.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/escaner.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/os.js') }}"></script>
 </head>
 
 <body style="height:50vh;">
@@ -19,14 +20,18 @@
     </nav>
     <!-- ENDNAVBAR -->
     <h1>Bienvenidos al escáner</h1>
-    Su versión de navegador <span id="navegador_actual"></span>
-    Usuarios activos: <span id="usuarios_activos"></span>
+    Su versión de navegador <span id="navegador_actual"></span><br />
+    Su versión de Sistema Operativo <span id="os_actual"></span><br />
+    Usuarios activos: <span id="usuarios_activos"></span><br />
+    Detector de Malware: <span id="malware_activo">Cargando...</span><br />
     <script>
         const ua = new UAParser();
         const dataClients = ua.getBrowser().withClientHints().then(function (browser) {
             console.log('Using Client-Hints: ', browser);
             getNavegadorActual(browser['name'],browser['major']);
         });
+        // TODO: Agregar lo mismo para el OS
+        // el endpoint es /os_actual con variables name, major
     </script>
 </body>
 
