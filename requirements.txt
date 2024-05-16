@@ -1,0 +1,6 @@
+Flask==2.0.1
+Werkzeug==2.2.2
+# ua_parser[re2]
+# ua-parser
+# pyyaml
+# user-agents ip install pyyaml ua-parser user-agents
