@@ -2,8 +2,9 @@
 
 ### Kiosco Movil
 
-    Tool for detect obsolete devices or version.
-    Team Introduction: 
+Tool for detect obsolete devices or version.
+Team Introduction: 
+    
     - LM backend
     - Me frontend
 
