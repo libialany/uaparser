@@ -5,3 +5,4 @@ requests==2.31.0
 # ua-parser
 # pyyaml
 # user-agents ip install pyyaml ua-parser user-agents
+python-dotenv

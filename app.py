@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request
 import sqlite3
 import requests
-# from ua_parser import parse_user_agent
+from enum import Enum
+import os
+from dotenv import load_dotenv
+load_dotenv()
+class Status(Enum):
+    SUCCESS = 1
+    FAIL = 2
 app = Flask(__name__)
 
 
@@ -15,10 +21,8 @@ def hello_world():
     return render_template('index.html')
 
 
-# Este endpoint recibe los pings de los clientes
-# y guardamos el último ping en la base de datos
-@app.route('/estoyvivo', methods=['POST'])
-def estoyvivo():
+@app.route('/status-client', methods=['POST'])
+def statusClient():
     data = request.get_json()
     visitor_id = data.get('visitorId')
     conn = get_db_connection()
@@ -28,7 +32,7 @@ def estoyvivo():
     conn.close()
     return str(visitor_id)
 
-# This Flask endpoint counts all pings received on 10 minutes
+""" description: Counts all pings received on 10 minutes"""
 @app.route('/usuariosactivos')
 def pingcount():
     conn = get_db_connection()
@@ -38,51 +42,69 @@ def pingcount():
     conn.close()
     return str(count['count'])
 
-# Obtener una lista de IPs en blacklist.
-# Si la IP del cliente está presente, responder con NOK en json.
-# De lo contrario, con OK.
+""" 
+    Obtener una lista de IPs en blacklist.
+    output: str 
+"""
 @app.route('/blacklist')
 def blacklist():
     ip = request.remote_addr
-    url = 'http://192.168.210.1:3080/cgi-bin/dominios2.sh'
+    url = os.getenv('URL_BLACKLIST')
     response = requests.get(url)
     ips_contaminadas = response.text 
     if ip in ips_contaminadas:
-        return 'NOK'
+        return Status.FAIL
     else:
-        return 'OK'
+        return Status.SUCCESS
 
-# Verificar el atributo "navegador" y "version". Si el navegador es Chrome y la versión es mayor a 80, responder con OK.
-# De lo contrario, responder con NOK.
+""" 
+    Checks the browser and 'version' attributes.
+    input: [str, str]
+    ouput: str
+"""
 @app.route('/navegador_actual', methods=['GET', 'POST'])
 def navegador():
     navegador = request.args.get('navegador')
     version = request.args.get('version')
-    if navegador == 'Chrome' and int(version) > 121:
-        return "OK";
-    elif navegador == 'Firefox' and int(version) > 120:
-        return "OK";
+    try:
+        version = int(version)
+    except ValueError:
+        return Status.FAIL
+    min_versions = {
+        'Chrome': 121,
+        'Firefox': 120,
+    } 
+    if navegador in min_versions and version > min_versions[version]:
+        return Status.SUCCESS
     elif navegador == 'Opera' and int(version) >= 700:
-        return "OK";
+        return Status.SUCCESS
     else:
-        return "NOK";
-
+        return  Status.FAIL
+""" 
+    Checks the device and 'version' attributes.
+    input: [str, str]
+    ouput: str
+"""
 @app.route('/os_actual', methods=['GET', 'POST'])
 def os():
     os = request.args.get('os')
     version = request.args.get('version')
-    if os == 'Android' and int(version) > 9:
-        return "OK";
-    elif os == 'iOS' and int(version) > 13:
-        return "OK";
-    elif os == 'Windows' and int(version) > 10:
-        return "OK";
-    elif os == 'Mac' and int(version) > 10:
-        return "OK";
+    try:
+        version = int(version)
+    except ValueError:
+        return Status.FAIL
+    min_versions = {
+        'Android': 10,
+        'iOS': 14,
+        'Windows': 11,
+        'Mac': 11
+    } 
+    if os in min_versions and version >= min_versions[os]:
+        return Status.SUCCESS
     elif os == 'Linux':
-        return "OK";
+        return Status.SUCCESS
     else:
-        return "NOK";
+        return Status.FAIL
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
