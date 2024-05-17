@@ -46,7 +46,7 @@
                                     <td>Su versión de navegador</td>
                                     <td><span id="navegador_actual"></span><br />
                                     <td>
-                                        <a class="btn btn-info" href="">Mas informacion</a>
+                                        <a class="btn btn-info" href="https://en.wikipedia.org/wiki/Template:Google_Chrome_release_compatibility">Mas informacion</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -67,7 +67,7 @@
                                     <td>Detector de Malware:</td>
                                     <td><span id="malware_activo">Cargando...</span><br /></td>
                                     <td>
-                                        <a class="btn btn-info" href="/">Actualizar</a>
+                                        <a class="btn btn-info" href="https://github.com/ppfeufer/adguard-filter-list">Conocer mas</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -87,8 +87,7 @@
         const dataServer = ua.getOS().withClientHints().then(function (browser) {
             getOSActual(browser['name'], browser['version']);
         });
-        // TODO: Agregar lo mismo para el OS
-        // el endpoint es /os_actual con variables name, major
+        
     </script>
 </body>
 
