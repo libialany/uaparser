@@ -62,7 +62,7 @@ def navegador():
         return "OK";
     elif navegador == 'Firefox' and int(version) > 120:
         return "OK";
-    elif navegador == 'Opera' and int(version) >= 700:
+    elif navegador == 'Opera' and int(version) >= 70:
         return "OK";
     else:
         return "NOK";
