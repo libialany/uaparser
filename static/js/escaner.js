@@ -20,8 +20,8 @@ function getCookieValue() {
 const visitorId = getCookieValue();
 console.log('Visitor ID:', visitorId);
 
-function estoyvivo() {
-  fetch('/estoyvivo', {
+function statusClient() {
+  fetch('/status-client', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -40,8 +40,8 @@ function estoyvivo() {
     });
 }
 
-setInterval(estoyvivo, 10000);
-estoyvivo();
+setInterval(statusClient, 10000);
+statusClient();
 
 function getNavegadorActual(name, major) {
   fetch(`/navegador_actual?navegador=${name}&version=${major}`)

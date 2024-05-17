@@ -45,17 +45,29 @@
                                 <tr>
                                     <td>Su versión de navegador</td>
                                     <td><span id="navegador_actual"></span><br />
-    Su versión de Sistema Operativo <span id="os_actual"></span><br /></td>
                                     <td>
-                                        <a class="btn btn-info" href=""> Edit</a>
+                                        <a class="btn btn-info" href="https://en.wikipedia.org/wiki/Template:Google_Chrome_release_compatibility">Mas informacion</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Usuarios activos:</td>
-                                    <td><span id="usuarios_activos"></span><br />
-    Detector de Malware: <span id="malware_activo">Cargando...</span><br /></td>
+                                    <td>Su versión de Sistema Operativo</td>
+                                    <td><span id="os_actual"></span><br /></td>
+                                    <td>
+                                        <a class="btn btn-info" href="https://hipertextual.com/2022/03/navegadores-ligeros-ordenadores-viejos">Mas informacion</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Usuarios activos en su red:</td>
+                                    <td><span id="usuarios_activos"></span><br /></td>
                                     <td>
                                         <a class="btn btn-info" href="/">Actualizar</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Detector de Malware:</td>
+                                    <td><span id="malware_activo">Cargando...</span><br /></td>
+                                    <td>
+                                        <a class="btn btn-info" href="https://github.com/ppfeufer/adguard-filter-list">Conocer mas</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -70,11 +82,12 @@
     <script>
         const ua = new UAParser();
         const dataClients = ua.getBrowser().withClientHints().then(function (browser) {
-            console.log('Using Client-Hints: ', browser);
             getNavegadorActual(browser['name'], browser['major']);
         });
-        // TODO: Agregar lo mismo para el OS
-        // el endpoint es /os_actual con variables name, major
+        const dataServer = ua.getOS().withClientHints().then(function (browser) {
+            getOSActual(browser['name'], browser['version']);
+        });
+        
     </script>
 </body>
 
